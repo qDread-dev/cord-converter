@@ -7,6 +7,8 @@ CORDCOUNT = int()
 for line in open(FILEPATH):
     print()
     CORDCOUNT += 1
-print(RAWCORDS)
-print(CORDCOUNT)
-    
+splitCords = []
+for i in range(CORDCOUNT):
+    splitCords.append(RAWCORDS.split(' '))
+
+print(splitCords)
