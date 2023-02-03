@@ -1,9 +1,9 @@
-import time
+from datetime import datetime
 import base64
-
+now = datetime.now()
 ROUTENAME = 'tmp name'
-STARTTIME = time.localtime()
-
+OUTFILENAME = f'{now.strftime("%Y-%m-%d_%H-%M-%S")}_OUT.txt'
+jsonCode = ""
 FILEPATH = input()
 #Gets cord length, splits into list, ect
 with open(FILEPATH) as f:
@@ -16,20 +16,21 @@ splitCords = []
 for i in range(CORDCOUNT):
     splitCords.append(RAWCORDS[i].split(' '))
 
+# print(splitCords)
 
-with open(f'cords.txt', 'w') as f:
-    f.write("""{"categories":[{"name" : "tmp_name", "waypoints" : [""")
-    for i in range(CORDCOUNT):
-        if i != CORDCOUNT:
-            f.write(f"""{{"name" : "{i},"x" : {splitCords[0]},"y" : {splitCords[1]},"z" : {splitCords[2]},"color" : 16711680,"addedAt" : 1672044394720}},""")
-        else:
-            f.write(f"""{{"name" : "{i},"x" : {splitCords[0]},"y" : {splitCords[1]},"z" : {splitCords[2]},"color" : 16711680,"addedAt" : 1672044394720}}""")
-    f.write("""],"island" : "crystal_hollows"}]}""")
-with open(f'cords.txt', 'r') as f:
-    cordTmp = f.readlines()
-print(cordTmp)
+jsonCode += """{"categories":[{"name" : "tmp_name", "waypoints" : ["""
+for i in range(CORDCOUNT):
+    if i != CORDCOUNT:
+        jsonCode += f"""{{"name" : "{i}","x" : {splitCords[i][0]},"y" : {splitCords[i][1]},"z" : {splitCords[i][2]},"color" : 16711680,"addedAt" : 1672044394720}},"""
+    else:
+        jsonCode += f"""{{"name" : "{i}","x" : {splitCords[i][0]},"y" : {splitCords[i][1]},"z" : {splitCords[i][2]},"color" : 16711680,"addedAt" : 1672044394720}}"""
+jsonCode += """],"island" : "crystal_hollows"}]}"""
 
-cordTmp = base64.b64encode(cordTmp)
+print(jsonCode)
 
-with open('cords.txt') as f:
-    f.write(cordTmp)
+cordTmp_bytes = str(jsonCode).encode('ascii')
+base64_bytes = base64.b64encode(cordTmp_bytes)
+base64_string = base64_bytes.decode('ascii')
+
+with open(OUTFILENAME, 'w') as f:
+    f.write(base64_string)
