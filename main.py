@@ -1,14 +1,55 @@
+import json
+import time
+ROUTENAME = 'tmp name'
+STARTTIME = time.localtime()
 
 FILEPATH = input()
-
+#Gets cord length, splits into list, ect
 with open(FILEPATH) as f:
-    RAWCORDS = f.read()
+    RAWCORDS = f.read().splitlines()
+
 CORDCOUNT = int()
 for line in open(FILEPATH):
-    print()
     CORDCOUNT += 1
 splitCords = []
 for i in range(CORDCOUNT):
-    splitCords.append(RAWCORDS.split(' '))
+    splitCords.append(RAWCORDS[i].split(' '))
 
-print(splitCords)
+
+with open(f'cords.txt', 'w') as f:
+    f.write("""
+    {
+        "categories":[
+           {
+             "name" : "tmp_name",
+         "waypoints" : [
+
+    """)
+    for i in range(CORDCOUNT):
+        if i != CORDCOUNT:
+            f.write(f"""
+            {{
+                "name" : "{i},
+                "x" : {splitCords[0]},
+                "y" : {splitCords[1]},
+                "z" : {splitCords[2]},
+                "color" : 16711680,
+                "addedAt" : 1672044394720
+            }},""")
+        else:
+            f.write(f"""
+            {{
+                "name" : "{i},
+                "x" : {splitCords[0]},
+                "y" : {splitCords[1]},
+                "z" : {splitCords[2]},
+                "color" : 16711680,
+                "addedAt" : 1672044394720
+            }}""")
+    f.write("""
+    ],
+    "island" : "crystal_hollows"
+    }
+    ]
+    }
+    """)
