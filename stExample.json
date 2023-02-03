@@ -1,0 +1,30 @@
+{
+    "categories" : [
+        {
+            "name" : "Example Name",
+            "waypoints" : [
+                {
+                    "name" : "1",
+                    "x" : 123,
+                    "y" : 123,
+                    "z" : 123,
+                    "enabled" : false,
+                    "color" : 16711680,
+                    "addedAt" : 1672044738723
+                },
+                
+                {
+                    "name" : "2",
+                    "x" : 123,
+                    "y" : 123,
+                    "z" : 123,
+                    "enabled" : false,
+                    "color" : 16711680,
+                    "addedAt" : 1672044738723
+                }
+
+            ],
+            "island" : "crystal_hollows"
+        }
+    ]
+}
