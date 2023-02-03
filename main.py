@@ -1,5 +1,6 @@
-import json
 import time
+import base64
+
 ROUTENAME = 'tmp name'
 STARTTIME = time.localtime()
 
@@ -53,3 +54,8 @@ with open(f'cords.txt', 'w') as f:
     ]
     }
     """)
+with open(f'cords.txt', 'r') as f:
+    cordTmp = f.readlines()
+print(cordTmp)
+
+cordTmp = base64.b64encode(cordTmp)
