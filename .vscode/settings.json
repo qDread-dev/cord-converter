@@ -3,5 +3,11 @@
     "python.linting.pylintEnabled": false,
     "python.analysis.diagnosticSeverityOverrides": {
         "reportMissingModuleSource": "none"
-    }
+    },
+    "python.analysis.extraPaths": [
+        "",
+        "/home/codespace/.vscode-remote/extensions/joedevivo.vscode-circuitpython-0.1.15/stubs",
+        "/home/codespace/.vscode-remote/data/User/globalStorage/joedevivo.vscode-circuitpython/bundle/20230207/adafruit-circuitpython-bundle-py-20230207/lib"
+    ],
+    "circuitpython.board.version": null
 }
